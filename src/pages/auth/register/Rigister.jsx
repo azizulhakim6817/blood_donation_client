@@ -53,7 +53,7 @@ const Rigister = () => {
 
   //! handleRegisterSubmit------------
   const handleRegisterSubmit = async (data) => {
-    console.log("Data user", data);
+    //console.log("Data user", data);
     const avatarImg = data?.avatar?.[0];
     try {
       const result = await registerUser(data.email, data.password);
@@ -62,7 +62,7 @@ const Rigister = () => {
       // new FormData()----js--------
       const formData = new FormData();
       formData?.append("image", avatarImg);
-      //imgbb api_url---------
+      //imgbb api_url-------
       const img_api_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_APIKEY}`;
 
       axios.post(img_api_url, formData).then((res) => {
