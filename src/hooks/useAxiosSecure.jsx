@@ -12,32 +12,38 @@ const useAxiosSecure = () => {
   const { user, signOutUser } = useAuth();
 
   useEffect(() => {
-    //! request-------
+    // request interceptor
     const interceptorRequest = axiosSecure.interceptors.request.use(
       (config) => {
-        config.headers.Authorization = `Bearer ${user?.accessToken}`;
+        if (user?.accessToken) {
+          config.headers.Authorization = `Bearer ${user?.accessToken}`;
+        }
+        //console.log("config", config);
         return config;
       },
+      (error) => Promise.reject(error),
     );
 
-    //! response--------
-    const intercepterRespons = axiosSecure.interceptors.response.use(
-      (res) => {
-        return res;
-      },
+    // response interceptor
+    const interceptorResponse = axiosSecure.interceptors.response.use(
+      (res) => res,
       (error) => {
-        const statusCode = error.status;
+        const statusCode = error.response?.status;
+
         if (statusCode === 401 || statusCode === 403) {
           signOutUser().then(() => {
             navigate("/login");
           });
         }
+
+        return Promise.reject(error);
       },
     );
 
+    // ✅ cleanup
     return () => {
       axiosSecure.interceptors.request.eject(interceptorRequest);
-      axiosSecure.interceptors.request.eject(intercepterRespons);
+      axiosSecure.interceptors.response.eject(interceptorResponse);
     };
   }, [user?.accessToken, signOutUser, navigate]);
 

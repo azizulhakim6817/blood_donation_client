@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
-
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import useAuth from "./../../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import useAxiosInstance from "../../../hooks/useAxiosInstance";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const Rigister = () => {
+const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { registerUser } = useAuth();
   const axiosInstance = useAxiosInstance();
 
@@ -29,7 +30,7 @@ const Rigister = () => {
     fetch("/data/districts.json")
       .then((res) => res.json())
       .then((data) => {
-        setDistricts(data[2].data);
+        setDistricts(data[2]?.data);
       });
   }, []);
 
@@ -42,9 +43,9 @@ const Rigister = () => {
     fetch("/data/upazilas.json")
       .then((res) => res.json())
       .then((data) => {
-        const allUpazilas = data[2].data;
+        const allUpazilas = data[2]?.data;
         const filtered = allUpazilas.filter(
-          (u) => u.district_id === selectedDistrictId,
+          (u) => u?.district_id === selectedDistrictId,
         );
 
         setUpazilas(filtered);
@@ -69,7 +70,7 @@ const Rigister = () => {
         //console.log("user", res?.data?.data?.display_url);
         const photoURL = res?.data?.data?.display_url;
         const districtName = districts.find(
-          (d) => d.id === data.district,
+          (d) => d?.id === data?.district,
         )?.name;
 
         const userInfo = {
@@ -81,15 +82,15 @@ const Rigister = () => {
           upazila: data?.upazila,
         };
 
-        axiosInstance.post(`user`, userInfo).then((res) => {
+        axiosInstance.post(`/user`, userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log(res.data);
+            console.log( res.data);
           }
         });
       });
-      /* end-------- */
       toast.success("Registration is successful");
-      navigate("/login");
+      navigate(location?.state || "/");
+      /* end-------- */
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Failed to register and Email already existed!");
@@ -235,7 +236,7 @@ const Rigister = () => {
               {/* already have an account------------- */}
               Already have an account?
               <Link
-                /*  state={locatoin.state} */
+                /*  state={location.state} */
                 to="/login"
                 className="text-blue-600 font-bold"
               >
@@ -249,4 +250,4 @@ const Rigister = () => {
   );
 };
 
-export default Rigister;
+export default Register;

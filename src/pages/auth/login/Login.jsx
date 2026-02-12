@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { signInUser } = useAuth();
+
   // react-hook-form---------------------------
   const {
     register,
@@ -18,9 +20,9 @@ const Login = () => {
   const handleLoginSubmit = async (data) => {
     try {
       const result = await signInUser(data.email, data.password);
-      console.log("New user:", result.user);
+      //console.log("New user:", result.user);
       toast.success("Login is successful");
-      navigate("/");
+      navigate(location.state || "/");
     } catch (error) {
       console.error("Registration error:", error);
       toast.error(error.message || "Failed to register");
@@ -91,7 +93,7 @@ const Login = () => {
                 New to Blood Donatoin account?
                 <Link
                   to="/register"
-                  /*  state={locatoin.state} */
+                  /*  state={location.state} */
                   className="text-blue-600 font-bold"
                 >
                   <span> Register</span>
