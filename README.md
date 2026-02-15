@@ -3,6 +3,7 @@
 ### Frontend Live URL :
 
 ### Backend Live URL :
+https://blood-donation-server-hazel.vercel.app/
 
 ### Admin Dashboard access :
 
@@ -72,7 +73,7 @@ npm run dev
 Start frontend
 Frontend runs at: http://localhost:5173
 
-Backend runs at: http://localhost:5000
+Backend runs at: https://blood-donation-server-hazel.vercel.app
 
 💳 Stripe Integration
 Add your Stripe secret key to .env as STRIPE_SECRET_KEY.
