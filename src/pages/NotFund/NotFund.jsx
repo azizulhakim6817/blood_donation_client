@@ -10,7 +10,7 @@ const NotFund = () => {
       <p className="text-gray-500 mb-6">
         Oops! The page you are looking for does not exist.
       </p>
-      {/*  link*/}
+      {/* link---------------------*/}
       <Link to="/">
         <button className="btn bg-primary text-white px-6">Back to Home</button>
       </Link>
