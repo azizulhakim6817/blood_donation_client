@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 const Fundings = () => {
   const { user } = useAuth();
@@ -11,6 +12,15 @@ const Fundings = () => {
   const [users, setUusers] = useState([]);
   const [amount, setAmount] = useState("");
 
+  //! get-funding -----------------
+  const { data: funds = [], isLoading } = useQuery({
+    queryKey: ["fundings"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/get-funding");
+      return res.data;
+    },
+  });
+  console.log(funds);
   //! user find by email-----------------
   useEffect(() => {
     const usersFind = async () => {
@@ -132,12 +142,14 @@ const Fundings = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="hover">
-              <td>1</td>
-              <td>{users?.displayName}</td>
-              <td className="text-green-600 font-semibold">$20</td>
-              <td>Feb 14, 2026</td>
-            </tr>
+            {funds.map((fund, i) => (
+              <tr key={i} className="hover">
+                <td>1</td>
+                <td>{fund?.donorName}</td>
+                <td className="text-green-600 font-semibold">$20</td>
+                <td>Feb 14, 2026</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
