@@ -134,7 +134,7 @@ const Fundings = () => {
           <tbody>
             <tr className="hover">
               <td>1</td>
-              <td>Azizul</td>
+              <td>{users?.displayName}</td>
               <td className="text-green-600 font-semibold">$20</td>
               <td>Feb 14, 2026</td>
             </tr>
