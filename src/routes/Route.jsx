@@ -5,7 +5,6 @@ import Login from "../pages/auth/login/Login";
 import DashboardLayout from "../layout/DashboardLayout";
 import ProfileDashboard from "../pages/Dashboard/ProfileDashboard/ProfileDashboard";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
-import ErrorPage from "./../pages/ErrorPage/ErrorPage";
 import AuthLayout from "../layout/AuthLayout";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/auth/register/Register";
@@ -29,7 +28,6 @@ const route = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -65,7 +63,6 @@ const route = createBrowserRouter([
   {
     path: "/",
     Component: AuthLayout,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: "login",
