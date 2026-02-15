@@ -14,7 +14,8 @@ const Fundings = () => {
 
   //! get-funding -----------------
   const { data: funds = [], isLoading } = useQuery({
-    queryKey: ["fundings"],
+    queryKey: ["fundings", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/get-single-funding?email=${user?.email}`,
