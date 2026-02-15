@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-const ErrorPage = () => {
+const NotFund = () => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen text-center px-4">
       <h1 className="text-4xl font-bold text-primary mb-2">
@@ -18,4 +18,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default NotFund;

@@ -2,7 +2,7 @@ import useRole from "../../../hooks/useRole";
 import AdminDashboard from "./AdminDashboard";
 import DonorDashboard from "./DonorDashboard";
 import Loading from "./../../../components/Loading/Loading";
-import ErrorPage from "../../ErrorPage/ErrorPage";
+import NotFund from "../../NotFund/NotFund";
 import VolunteerDashboard from "./VolunteerDashboard";
 
 const DashboardHome = () => {
@@ -18,7 +18,7 @@ const DashboardHome = () => {
     case "volunteer":
       return <VolunteerDashboard />;
     default:
-      return <ErrorPage />;
+      return <NotFund />;
   }
 };
 
