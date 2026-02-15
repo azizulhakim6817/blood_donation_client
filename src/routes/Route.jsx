@@ -22,12 +22,15 @@ import Search from "../pages/home/Search/Search";
 import BloodDonationRequestDetails from "../pages/home/DonationRequests/BloodDonationRequestDetails";
 import PaymentSuccess from "../pages/Dashboard/Payments/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/Payments/PaymentCancel/PaymentCancel";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const route = createBrowserRouter([
   /* rool-layout---------------- */
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -63,6 +66,7 @@ const route = createBrowserRouter([
   {
     path: "/",
     Component: AuthLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "login",
@@ -83,7 +87,7 @@ const route = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage /> ,
     children: [
       {
         index: true,

@@ -1,12 +1,12 @@
-// src/layout/DashboardLayout.jsx
 import { Link, Outlet } from "react-router";
 import { MdHome } from "react-icons/md";
-import { FaClipboardList, FaUsers, FaUser } from "react-icons/fa";
+import { FaUserLarge } from "react-icons/fa6";
+import { FaClipboardList, FaUsers } from "react-icons/fa";
 import { Save, SaveAll } from "lucide-react";
 import { IoSettings } from "react-icons/io5";
+import useRole from "../hooks/useRole";
 import { RiRefund2Fill } from "react-icons/ri";
 import logo from "../assets/logo.png";
-import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -17,14 +17,14 @@ const DashboardLayout = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          {/* Navbar */}
+          {/* Navbar------------*/}
           <nav className="navbar w-full bg-base-300">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
               className="btn btn-square btn-ghost"
             >
-              {/* Sidebar toggle icon */}
+              {/* Sidebar toggle icon--------*/}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -44,9 +44,9 @@ const DashboardLayout = () => {
               Blood Donation Application 🩸
             </div>
           </nav>
-
-          {/* Page content */}
-          <Outlet />
+          {/* Page content here------*/}
+          <Outlet></Outlet>
+          {/* <div className="p-4">Page Content</div>-----*/}
         </div>
 
         <div className="drawer-side is-drawer-close:overflow-visible">
@@ -56,35 +56,38 @@ const DashboardLayout = () => {
             className="drawer-overlay"
           ></label>
           <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-            {/* Sidebar menu */}
+            {/* Sidebar content here----*/}
             <ul className="menu w-full grow space-y-1">
-              {/* Home */}
+              {/* List item----*/}
+              {/*Home------------------- */}
               <li>
                 <Link
                   to="/"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Home"
                 >
+                  {/* Home icon---*/}
                   <div>
-                    <img className="h-8 w-8" src={logo} alt="Logo" />
+                    <img className="h-8 w-8" src={logo} alt="" />
                   </div>
+
                   <span className="is-drawer-close:hidden">Home</span>
                 </Link>
               </li>
-
-              {/* Dashboard Home */}
+              {/* Dashboard Home------------------- */}
               <li>
                 <Link
                   to="/dashboard"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Dashboard Home"
                 >
+                  {/* Home icon---*/}
                   <MdHome size={26} />
                   <span className="is-drawer-close:hidden">Dashboard Home</span>
                 </Link>
               </li>
 
-              {/* All Blood Donation Requests (admin & volunteer) */}
+              {/* All Blood Donation Request------------------- */}
               {["admin", "volunteer"].includes(role) && (
                 <li>
                   <Link
@@ -100,21 +103,21 @@ const DashboardLayout = () => {
                 </li>
               )}
 
-              {/* Create Donation Request */}
+              {/* Create Donation Request------------------- */}
               <li>
                 <Link
                   to="/dashboard/donation-request"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Create Donation Request"
                 >
+                  {/* Home icon */}
                   <FaClipboardList size={20} className="mr-2" />
                   <span className="is-drawer-close:hidden">
                     Create Donation Request
                   </span>
                 </Link>
               </li>
-
-              {/* My Donation Requests */}
+              {/* My Donation Requests------------------ */}
               <li>
                 <Link
                   to="/dashboard/my-donation-requests"
@@ -128,56 +131,63 @@ const DashboardLayout = () => {
                 </Link>
               </li>
 
-              {/* Funding Dashboard (admin & volunteer) */}
+              {/* Admin --volunteer logic-------------------- */}
               {(role === "admin" || role === "volunteer") && (
-                <li>
-                  <Link
-                    to="/dashboard/funding-dasboard"
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="$ Funding"
-                  >
-                    <RiRefund2Fill size={24} />
-                    <span className="is-drawer-close:hidden">Funding</span>
-                  </Link>
-                </li>
+                <>
+                  {/* Funding Dashboard */}
+                  <li>
+                    <Link
+                      to="/dashboard/funding-dasboard"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="$ Funding"
+                    >
+                      <RiRefund2Fill size={24} />
+                      <span className="is-drawer-close:hidden">Funding</span>
+                    </Link>
+                  </li>
+                </>
               )}
 
-              {/* All Users Dashboard (admin only) */}
+              {/* All Users Dashboard------------------- */}
               {role === "admin" && (
-                <li>
-                  <Link
-                    to="/dashboard/all-users-dashboard"
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="All Users Dashboard"
-                  >
-                    <FaUsers size={22} />
-                    <span className="is-drawer-close:hidden">
-                      All Users Dashboard
-                    </span>
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link
+                      to="/dashboard/all-users-dashboard"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="All Users Dashboard"
+                    >
+                      <FaUsers size={22} />
+                      <span className="is-drawer-close:hidden">
+                        All Users Dashboard
+                      </span>
+                    </Link>
+                  </li>
+                </>
               )}
 
-              {/* My Profile */}
+              {/* My Profile Dashboard------------------- */}
               <li>
                 <Link
                   to="/dashboard/profile"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="My Profile"
                 >
-                  <FaUser size={20} />
+                  {/* Home icon */}
+                  <FaUserLarge size={20} />
                   <span className="is-drawer-close:hidden">
                     My Profile Dashboard
                   </span>
                 </Link>
               </li>
 
-              {/* Settings */}
+              {/* Sitting-------------------- */}
               <li>
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Settings"
                 >
+                  {/* Settings icon */}
                   <IoSettings size={20} />
                   <span className="is-drawer-close:hidden">Settings</span>
                 </button>
