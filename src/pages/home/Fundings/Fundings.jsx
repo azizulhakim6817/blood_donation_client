@@ -151,7 +151,7 @@ const Fundings = () => {
                 <td className="text-green-600 font-semibold">
                   ${fund?.amount}
                 </td>
-                <td>{fund?.createdAt}</td>
+                <td>{new Date(fund?.createdAt).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
