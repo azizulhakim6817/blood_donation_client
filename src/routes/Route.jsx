@@ -49,7 +49,11 @@ const route = createBrowserRouter([
       },
       {
         path: "fundings",
-        Component: Fundings,
+        element: (
+          <PrivateRoute>
+            <Fundings></Fundings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "search",

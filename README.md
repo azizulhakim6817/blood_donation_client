@@ -1,8 +1,8 @@
 # React + Vite
 
-## Frontend Live URL :
+### Frontend Live URL :
 
-## Backend Live URL :
+### Backend Live URL :
 
 ### Admin Dashboard access :
 
@@ -43,7 +43,7 @@ A modern **ReactJS** application for managing blood donation and funding, integr
 
 1. Clone the repository:
 
-````bash
+```bash
 git clone https://github.com/your-username/blood-donation-app.git
 cd blood-donation-app
 Install dependencies:
@@ -90,9 +90,7 @@ Redirect to Stripe payment page
 On success → redirect to /dashboard/payment-success
 
 On cancel → redirect to /dashboard/payment-cancel
-
-## 📂 Project Structure
-```js
+📂 Project Structure
 client/
   src/
     pages/
@@ -102,9 +100,10 @@ client/
         PaymentCancel.jsx
     hooks/
     components/
-server/          # Express backend
+server/
   routes/
     funding.js
     stripe.js
   server.js
-````
+
+```

@@ -27,8 +27,8 @@ const Login = () => {
       toast.success("Login is successful");
       navigate(from, { replace: true });
     } catch (error) {
-      console.error("Registration error:", error);
-      toast.error(error.message || "Failed to register");
+      console.error(error);
+      toast.error("Please register before continuing!");
     }
   };
 

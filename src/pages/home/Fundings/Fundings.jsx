@@ -24,6 +24,10 @@ const Fundings = () => {
     },
   });
 
+  //! total fund only by email user---------------
+  const total = funds.reduce((sum, fund) => sum + fund?.amount, 0);
+  <p>Total: ${total}</p>;
+
   //! user find by email-----------------
   useEffect(() => {
     const usersFind = async () => {
@@ -116,7 +120,7 @@ const Fundings = () => {
               </h3>
               {/* Amount */}
               <p className="text-2xl md:text-3xl font-bold text-green-600">
-                $5,230
+                ${total}
               </p>
             </div>
           </div>
