@@ -101,7 +101,8 @@ const FundingDashboard = () => {
           </span>
           !
           <span className="text-accent text-[16px] md:text-2xl">
-            <IoLogoUsd />
+         
+            ({funds?.length})
           </span>
         </h1>
 
