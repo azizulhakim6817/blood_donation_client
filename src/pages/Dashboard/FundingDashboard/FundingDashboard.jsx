@@ -129,7 +129,7 @@ const FundingDashboard = () => {
                 <td>{index + 1}</td>
                 <td>{fund.donorName}</td>
                 <td>${fund.amount}</td>
-                <td>{new Date(fund.fundingDate).toLocaleDateString()}</td>
+                <td>{new Date(fund.createdAt).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
