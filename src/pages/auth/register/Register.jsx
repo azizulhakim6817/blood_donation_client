@@ -5,13 +5,15 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import useAxiosInstance from "../../../hooks/useAxiosInstance";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { registerUser } = useAuth();
   const axiosInstance = useAxiosInstance();
+
+  //navigate ---location----------
+  const from = location.state?.from?.pathname || "/";
 
   // react-hook-form---------------------------
   const {
@@ -84,12 +86,12 @@ const Register = () => {
 
         axiosInstance.post(`/user`, userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log( res.data);
+            console.log(res.data);
           }
         });
       });
       toast.success("Registration is successful");
-      navigate(location?.state || "/");
+      navigate(from, { replace: true });
       /* end-------- */
     } catch (error) {
       console.error("Registration error:", error);

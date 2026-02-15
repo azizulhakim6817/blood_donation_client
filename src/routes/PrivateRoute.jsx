@@ -11,9 +11,16 @@ const PrivateRoute = ({ children }) => {
   }
 
   if (user) {
-      return <>{children}</>;
+    return <>{children}</>;
   }
-  <Navigate to="/login" state={location?.pathname}></Navigate>;
+
+  return (
+    <Navigate
+      to="/login"
+      state={{ from: location }} 
+      replace
+    />
+  );
 };
 
 export default PrivateRoute;

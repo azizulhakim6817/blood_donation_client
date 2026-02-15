@@ -1,49 +1,60 @@
 import { Link } from "react-router";
 import { FaUser, FaSearch } from "react-icons/fa";
-import { GiBloodDrop } from "react-icons/gi";
+import img2 from "../../../../assets/blood_donation.png";
 
 const Banner = () => {
   return (
-    <div className="relative bg-gradient-to-r from-red-600 via-red-500 to-pink-500 px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40 text-white overflow-hidden">
-      {/* Decorative Floating Circles */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/4 translate-y-1/4 animate-pulse"></div>
+    <section className="relative overflow-hidden bg-linear-to-br from-[#7b00a8] via-[#1E3A8A] to-[#012b30] text-white">
+      {/* Glow Background */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl animate-pulse"></div>
 
-      {/* Main Content */}
-      <div className="relative max-w-6xl mx-auto text-center">
-        {/* Heading */}
-        <h1 className="flex justify-center items-center gap-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
-          Give Blood, Save Lives
-          <GiBloodDrop className="text-yellow-300 animate-bounce" size={36} />
-        </h1>
+      <div className="relative max-w-7xl mx-auto px-8 py-8">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
+          {/* Left Content */}
+          <div className="flex-1 text-center lg:text-left">
+            <h1 className="text-2xl sm:text-5xl  font-extrabold leading-tight mb-6">
+              <span className="bg-linear-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent">
+                Give Blood
+              </span>
+              <span> Save Lives</span>
+            </h1>
 
-        {/* Subtext */}
-        <p className="text-white/90 text-sm sm:text-base md:text-lg mb-10 max-w-3xl mx-auto drop-shadow-sm">
-          Your donation can save up to three lives. Join our community of donors
-          and make a difference today.
-        </p>
+            <p className="text-gray-300 text-[14px]   max-w-xl mx-auto lg:mx-0 mb-8">
+              Your donation can save up to three lives.<br></br> Join our
+              trusted donor community and become someone’s hero today.
+            </p>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link
-            to="/register"
-            className="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-red-700 font-semibold px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition flex items-center justify-center gap-2"
-          >
-            Join as a Donor <FaUser />
-          </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link
+                to="/register"
+                className="group bg-linear-to-r from-yellow-400 to-red-500 hover:bg-yellow-300  text-red-700 font-semibold px-8 py-3 rounded-full shadow-xl transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Join as Donor
+                <FaUser className=" group-hover:translate-x-1 transition duration-300" />
+              </Link>
 
-          <Link
-            to="/search"
-            className="w-full sm:w-auto border border-white text-white hover:bg-white hover:text-red-500 font-semibold px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition flex items-center justify-center gap-2"
-          >
-            Search Donors <FaSearch />
-          </Link>
+              <Link
+                to="/search"
+                className="group border border-white/70 text-white hover:bg-linear-to-r from-yellow-400 to-red-500 hover:text-accent font-semibold px-8 py-3 rounded-full shadow-xl transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Search Donors
+                <FaSearch className="group-hover:translate-x-1 transition duration-300" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className="flex-1 flex justify-center">
+            <img
+              src={img2}
+              alt="Blood Donation"
+              className="w-72 h-72 sm:w-96 lg:w-96 md:h-96 rounded-2xl max-w-md drop-shadow-2xl animate-float"
+            />
+          </div>
         </div>
       </div>
-
-      {/* Optional Hero Blood Drop Illustration */}
-      <div className="hidden md:block absolute right-0 bottom-0 w-64 h-64 bg-red-700/20 rounded-full -translate-x-1/4 translate-y-1/4 animate-pulse"></div>
-    </div>
+    </section>
   );
 };
 

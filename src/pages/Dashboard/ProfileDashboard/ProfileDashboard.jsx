@@ -38,6 +38,7 @@ const ProfileDashboard = () => {
       return res.data;
     },
   });
+  console.log("d", profile);
 
   //  set react-hook-form values------------
   useEffect(() => {
@@ -178,7 +179,11 @@ const ProfileDashboard = () => {
           >
             <option value="">Select Upazila</option>
             {upazilas?.map((u) => (
-              <option key={u?.id} value={u?.name}>
+              <option
+                selected={u.name === profile.upazila}
+                key={u?.id}
+                value={u?.name}
+              >
                 {u?.name}
               </option>
             ))}

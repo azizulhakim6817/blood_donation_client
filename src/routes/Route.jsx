@@ -20,6 +20,9 @@ import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest/
 import DonationRequests from "../pages/home/DonationRequests/DonationRequests";
 import Fundings from "../pages/home/Fundings/Fundings";
 import Search from "../pages/home/Search/Search";
+import BloodDonationRequestDetails from "../pages/home/DonationRequests/BloodDonationRequestDetails";
+import PaymentSuccess from "../pages/Dashboard/Payments/PaymentSuccess/PaymentSuccess";
+import PaymentCancel from "../pages/Dashboard/Payments/PaymentCancel/PaymentCancel";
 
 const route = createBrowserRouter([
   /* rool-layout---------------- */
@@ -37,8 +40,12 @@ const route = createBrowserRouter([
         Component: DonationRequests,
       },
       {
-        path: "donation-reqests-details",
-        Component: DonationRequestDetails,
+        path: "blood-donation-reqests-details/:id",
+        element: (
+          <PrivateRoute>
+            <BloodDonationRequestDetails></BloodDonationRequestDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "fundings",
@@ -127,6 +134,14 @@ const route = createBrowserRouter([
             <AllBloodDonationRequest></AllBloodDonationRequest>
           </AdminRoute>
         ),
+      },
+      {
+        path: "payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "payment-cancel",
+        Component: PaymentCancel,
       },
     ],
   },

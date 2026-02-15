@@ -119,34 +119,23 @@ const AllBloodDonationRequest = () => {
                   <td>{req.donationTime}</td>
                   <td>{req.bloodGroup}</td>
 
-                  {/* status---pending-done-canceled-inprogress--view/edit/delete */}
+                  {/* status---pending------ */}
                   <td>
-                    {/* status---pending-done-canceled-inprogress------ */}
-                    {req?.status === "pending" ? (
-                      <div className="flex gap-1">
-                        <button
-                          className="btn btn-xs bg-primary text-white"
-                          onClick={() => handleStatusUpdate(req._id, "done")}
-                        >
-                          Pending to <span className="font-semibold">Done</span>
-                        </button>
-
-                        <button
-                          className="btn btn-xs btn-warning"
-                          onClick={() =>
-                            handleStatusUpdate(req._id, "canceled")
-                          }
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    ) : req?.status === "done" ? (
-                      <button className="btn btn-xs btn-success px-16" disabled>
-                        Done
-                      </button>
-                    ) : (
-                      <button className="btn btn-xs btn-error px-14" disabled>
-                        Canceled
+                    {req?.status && (
+                      <button
+                        className={`btn btn-xs text-white ${
+                          req.status === "pending"
+                            ? "bg-error"
+                            : req.status === "inprogress"
+                              ? "bg-warning"
+                              : req.status === "done"
+                                ? "bg-primary"
+                                : req.status === "canceled"
+                                  ? "bg-gray-500"
+                                  : "bg-secondary"
+                        }`}
+                      >
+                        {req.status}
                       </button>
                     )}
                   </td>

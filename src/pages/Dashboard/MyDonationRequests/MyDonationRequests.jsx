@@ -18,7 +18,7 @@ const MyDonationmyRequestsData = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // ✅ Fetch donor's own requests
+  // get my Requests Data--------------
   const {
     data: myRequestsData = [],
     isLoading,
@@ -34,22 +34,22 @@ const MyDonationmyRequestsData = () => {
     },
   });
 
-  // 🔍 Filter by status
+  // filter by status
   const filteredmyRequestsData =
     statusFilter === "all"
       ? myRequestsData
       : myRequestsData.filter((r) => r.status === statusFilter);
 
-  // 📄 Pagination logic
+  // pagination logic
   const totalPages = Math.ceil(filteredmyRequestsData.length / ITEMS_PER_PAGE);
-  const clampedPage = Math.min(currentPage, totalPages || 1); // make sure page is valid
+  const clampedPage = Math.min(currentPage, totalPages || 1);
   const startIndex = (clampedPage - 1) * ITEMS_PER_PAGE;
   const paginatedmyRequestsData = filteredmyRequestsData.slice(
     startIndex,
     startIndex + ITEMS_PER_PAGE,
   );
 
-  // 🔁 Status update
+  // status update
   const handleStatusUpdate = async (id, status) => {
     try {
       await axiosSecure.patch(`/update-donation-status/${id}`, { status });
@@ -61,7 +61,7 @@ const MyDonationmyRequestsData = () => {
     }
   };
 
-  // ❌ Delete request
+  // Delete request
   const handleDeleteRequest = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -97,14 +97,14 @@ const MyDonationmyRequestsData = () => {
         My Donation Requests 🩸
       </h1>
 
-      {/* 🔍 Status Filter */}
+      {/* Status Filter */}
       <div className="mb-4 text-center">
         <select
           className="select select-bordered"
           value={statusFilter}
           onChange={(e) => {
             setStatusFilter(e.target.value);
-            setCurrentPage(1); // reset page on filter change
+            setCurrentPage(1);
           }}
         >
           <option value="all">All</option>
@@ -115,7 +115,7 @@ const MyDonationmyRequestsData = () => {
         </select>
       </div>
 
-      {/* 📊 Table */}
+      {/* Table */}
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -144,7 +144,9 @@ const MyDonationmyRequestsData = () => {
                   <td>{req.donationDate}</td>
                   <td>{req.donationTime}</td>
                   <td>{req.bloodGroup}</td>
-                  <td>{req.status}</td>
+                  <td className="bg-error btn btn-xs text-white">
+                    {req.status}
+                  </td>
                   <td>
                     {req.status === "inprogress"
                       ? `${req.requesterName} (${req.requesterEmail})`
@@ -216,7 +218,7 @@ const MyDonationmyRequestsData = () => {
         </table>
       </div>
 
-      {/* 📄 Pagination */}
+      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center gap-2 mt-6 flex-wrap">
           {[...Array(totalPages).keys()].map((page) => (

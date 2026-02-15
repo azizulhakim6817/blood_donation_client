@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router";
 import Logo from "../components/logo/Logo";
-import bloodDonationImg from "../assets/blood donation.avif";
+import bloodDonationImg from "../assets/blood_donation.png";
 
 const AuthLayout = () => {
   return (

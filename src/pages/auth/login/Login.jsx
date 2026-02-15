@@ -4,9 +4,12 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const { signInUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const { signInUser } = useAuth();
+
+  //navigate ---location----------
+  const from = location.state?.from?.pathname || "/";
 
   // react-hook-form---------------------------
   const {
@@ -22,7 +25,7 @@ const Login = () => {
       const result = await signInUser(data.email, data.password);
       //console.log("New user:", result.user);
       toast.success("Login is successful");
-      navigate(location.state || "/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.error("Registration error:", error);
       toast.error(error.message || "Failed to register");

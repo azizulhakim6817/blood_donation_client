@@ -3,10 +3,16 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Loading/Loading";
 import { IoLogoUsd } from "react-icons/io5";
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import { useState } from "react";
 
 const FundingDashboard = () => {
+  const { id } = useParams();
+  console.log("id", id);
   const axiosSecure = useAxiosSecure();
 
+  //! get-funding -----------------
   const { data: funds = [], isLoading } = useQuery({
     queryKey: ["fundings"],
     queryFn: async () => {
@@ -14,6 +20,16 @@ const FundingDashboard = () => {
       return res.data;
     },
   });
+
+  //! handlePayment----------------------
+  const handlePayment = async (requestData) => {
+    const paymentInfo = {};
+    const res = await axiosSecure.post(`/create-checkout-session`, paymentInfo);
+
+    if (res.data.url) {
+      return window.location.assign(res.data.url);
+    }
+  };
 
   //! loading-------------------
   if (isLoading) {
@@ -25,13 +41,19 @@ const FundingDashboard = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className=" mt-3 flex gap-2 justify-center items-center text-primary text-xl md:text-2xl font-bold text-center">
           <span className="hidden md:block"> Welcome,</span>
-          <span className="text-secondary text-[16px] md:text-2xl">Funding History</span>!
+          <span className="text-secondary text-[16px] md:text-2xl">
+            Funding History
+          </span>
+          !
           <span className="text-accent text-[16px] md:text-2xl">
             <IoLogoUsd />
           </span>
         </h1>
 
-        <button className="btn bg-primary text-white hover:bg-accent">
+        <button
+          onClick={() => handlePayment()}
+          className="btn bg-primary text-white hover:bg-accent"
+        >
           <FaMoneyBillWave /> Give Fund
         </button>
       </div>
