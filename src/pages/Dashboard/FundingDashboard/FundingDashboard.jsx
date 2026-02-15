@@ -6,11 +6,15 @@ import { IoLogoUsd } from "react-icons/io5";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useState } from "react";
+import { useRef } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 const FundingDashboard = () => {
-  const { id } = useParams();
-  console.log("id", id);
+  const openRef = useRef(null);
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [users, setUusers] = useState([]);
+  const [amount, setAmount] = useState("");
 
   //! get-funding -----------------
   const { data: funds = [], isLoading } = useQuery({
@@ -21,13 +25,64 @@ const FundingDashboard = () => {
     },
   });
 
-  //! handlePayment----------------------
-  const handlePayment = async (requestData) => {
-    const paymentInfo = {};
-    const res = await axiosSecure.post(`/create-checkout-session`, paymentInfo);
+  //! handleOpenModal----------------------
+  const handleOpenModal = () => {
+    if (openRef.current) {
+      openRef.current.showModal();
+    }
+  };
+  //! handleCloseModal --> close-butotn----------------------
+  const handleCloseModal = () => {
+    if (openRef.current) {
+      openRef.current.close();
+    }
+  };
 
-    if (res.data.url) {
-      return window.location.assign(res.data.url);
+  //! user find by email-----------------
+  useEffect(() => {
+    const usersFind = async () => {
+      try {
+        if (!user?.email) return;
+        const res = await axiosSecure.get(`/get-user?email=${user?.email}`);
+        setUusers(res.data);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    usersFind();
+  }, [user?.email]);
+
+  //! handlePayment----------------------
+  const handlePayment = async () => {
+    if (!amount || isNaN(amount) || Number(amount) <= 0) {
+      return toast.error("Please enter a valid amount");
+    }
+
+    const paymentInfo = {
+      donorName: users?.displayName,
+      donorEmail: users?.email,
+      amount: Number(amount),
+    };
+
+    try {
+      // 1️⃣ Save funding
+      const fundingRes = await axiosSecure.post("/funding", paymentInfo);
+      if (!fundingRes.data.insertedId) {
+        return toast.error("Failed to save funding");
+      }
+
+      // 2️⃣ Create Stripe session
+      const sessionRes = await axiosSecure.post(
+        "/create-checkout-session",
+        paymentInfo,
+      );
+      if (sessionRes.data.url) {
+        window.location.assign(sessionRes.data.url);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error?.response?.data?.error || "Payment failed");
     }
   };
 
@@ -51,7 +106,7 @@ const FundingDashboard = () => {
         </h1>
 
         <button
-          onClick={() => handlePayment()}
+          onClick={handleOpenModal}
           className="btn bg-primary text-white hover:bg-accent"
         >
           <FaMoneyBillWave /> Give Fund
@@ -80,6 +135,47 @@ const FundingDashboard = () => {
           </tbody>
         </table>
       </div>
+      {/* Dialogs--------------------- */}
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <dialog ref={openRef} className="modal">
+        <div className="modal-box w-full max-w-md">
+          <h3 className="font-bold text-lg mb-4">Confirm Your Donation</h3>
+
+          {/* Donor Info */}
+          <div className="space-y-3">
+            <input
+              type="text"
+              value={users?.displayName || ""}
+              readOnly
+              className="input input-bordered w-full"
+            />
+            <input
+              type="email"
+              value={users?.email || ""}
+              readOnly
+              className="input input-bordered w-full"
+            />
+            <input
+              type="number"
+              name="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="input input-bordered w-full"
+              placeholder="Your Amount..."
+            />
+          </div>
+
+          {/* Modal Actions */}
+          <div className="modal-action flex justify-between mt-4">
+            <button onClick={handlePayment} className="btn btn-success">
+              Confirm
+            </button>
+            <button onClick={handleCloseModal} className="btn">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

@@ -135,14 +135,8 @@ const route = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      {
-        path: "payment-success",
-        Component: PaymentSuccess,
-      },
-      {
-        path: "payment-cancel",
-        Component: PaymentCancel,
-      },
+      { path: "payment-success", Component: PaymentSuccess },
+      { path: "payment-cancel", Component: PaymentCancel },
     ],
   },
 ]);

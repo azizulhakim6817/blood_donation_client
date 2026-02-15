@@ -53,22 +53,26 @@ const Fundings = () => {
     };
 
     try {
-      // 1️⃣ Save funding
+      // Save funding
       const fundingRes = await axiosSecure.post("/funding", paymentInfo);
       if (!fundingRes.data.insertedId) {
         return toast.error("Failed to save funding");
       }
 
-      // 2️⃣ Create Stripe session
+      // Create Stripe session
       const sessionRes = await axiosSecure.post(
         "/create-checkout-session",
         paymentInfo,
       );
+      console.log("Stripe session URL:", sessionRes.data.url); // debug
+
       if (sessionRes.data.url) {
         window.location.assign(sessionRes.data.url);
+      } else {
+        toast.error("Stripe session not created");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Payment error:", error.response?.data || error.message);
       toast.error(error?.response?.data?.error || "Payment failed");
     }
   };
