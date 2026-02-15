@@ -1,29 +1,26 @@
-import { useLocation } from "react-router";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaTimesCircle } from "react-icons/fa";
 
-const PaymentSuccess = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const sessionId = query.get("session_id");
-
+const PaymentCancel = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-red-50 p-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md text-center">
-        <FaCheckCircle className="text-green-500 text-6xl mx-auto mb-4" />
-        <h1 className="text-3xl font-bold text-green-700 mb-2">
-          Payment Successful!
+        {/* Cancel Icon */}
+        <FaTimesCircle className="text-red-500 text-6xl mx-auto mb-4" />
+
+        {/* Title */}
+        <h1 className="text-3xl font-bold text-red-700 mb-2">
+          Payment Cancelled
         </h1>
+
+        {/* Message */}
         <p className="text-gray-600 mb-4">
-          Thank you for your generous donation.
+          Your payment was not completed. Please try again.
         </p>
-        {sessionId && (
-          <p className="text-gray-500 text-sm break-all">
-            Your session ID: <span className="font-mono">{sessionId}</span>
-          </p>
-        )}
+
+        {/* Back to Dashboard button */}
         <button
           onClick={() => (window.location.href = "/dashboard")}
-          className="mt-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
+          className="mt-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
         >
           Back to Dashboard
         </button>
@@ -32,4 +29,4 @@ const PaymentSuccess = () => {
   );
 };
 
-export default PaymentSuccess;
+export default PaymentCancel;
