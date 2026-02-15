@@ -1,16 +1,110 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Frontend Live URL :
 
-Currently, two official plugins are available:
+## Backend Live URL :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Admin Dashboard access :
 
-## React Compiler
+1. Email : programmerazizulhakim@gmail.com
+2. Password : 123456
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Blood Donation & Funding Application
 
-## Expanding the ESLint configuration
+A modern **ReactJS** application for managing blood donation and funding, integrated with **Stripe** for secure online payments. Donors can contribute funds, view their funding history, and track total donations. Admins can manage donations and view donor data.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🌟 Features
+
+- User authentication with email login
+- Donor dashboard to make donations
+- Funding history table and mobile view cards
+- Dynamic total funds calculation
+- Stripe integration for secure payments
+- Payment success & cancel pages
+- Responsive modern UI with TailwindCSS
+- Admin can view all donations
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: ReactJS, TailwindCSS, React Router, React Query
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Payment Gateway**: Stripe
+- **State Management**: React hooks + React Query
+- **Notifications**: react-toastify
+
+---
+
+## 🚀 Installation
+
+1. Clone the repository:
+
+````bash
+git clone https://github.com/your-username/blood-donation-app.git
+cd blood-donation-app
+Install dependencies:
+
+bash
+Copy code
+# Frontend
+cd client
+npm install
+
+# Backend
+cd ../server
+npm install
+Create .env file in backend folder:
+
+env
+Copy code
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+STRIPE_SECRET_KEY=your_stripe_secret_key
+SITE_DOMAIN=http://localhost:5173
+
+🏃‍♂️ Running the Project
+Start backend server
+npm run dev
+Start frontend
+Frontend runs at: http://localhost:5173
+
+Backend runs at: http://localhost:5000
+
+💳 Stripe Integration
+Add your Stripe secret key to .env as STRIPE_SECRET_KEY.
+
+Donation flow:
+
+User enters amount in modal
+
+Funding saved in MongoDB
+
+Stripe checkout session created
+
+Redirect to Stripe payment page
+
+On success → redirect to /dashboard/payment-success
+
+On cancel → redirect to /dashboard/payment-cancel
+
+## 📂 Project Structure
+```js
+client/
+  src/
+    pages/
+      Dashboard/
+        Fundings.jsx
+        PaymentSuccess.jsx
+        PaymentCancel.jsx
+    hooks/
+    components/
+server/          # Express backend
+  routes/
+    funding.js
+    stripe.js
+  server.js
+````
