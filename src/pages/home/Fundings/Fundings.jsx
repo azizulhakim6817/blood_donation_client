@@ -151,7 +151,7 @@ const Fundings = () => {
                 <td className="text-green-600 font-semibold">
                   ${fund?.amount}
                 </td>
-                <td>Feb 14, 2026</td>
+                <td>{fund?.createdAt}</td>
               </tr>
             ))}
           </tbody>
