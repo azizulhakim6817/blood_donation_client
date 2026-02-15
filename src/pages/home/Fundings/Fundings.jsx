@@ -22,7 +22,7 @@ const Fundings = () => {
       return res.data;
     },
   });
-  
+
   //! user find by email-----------------
   useEffect(() => {
     const usersFind = async () => {
@@ -148,7 +148,9 @@ const Fundings = () => {
               <tr key={i} className="hover">
                 <td>1</td>
                 <td>{fund?.donorName}</td>
-                <td className="text-green-600 font-semibold">$20</td>
+                <td className="text-green-600 font-semibold">
+                  ${fund?.amount}
+                </td>
                 <td>Feb 14, 2026</td>
               </tr>
             ))}
