@@ -16,11 +16,13 @@ const Fundings = () => {
   const { data: funds = [], isLoading } = useQuery({
     queryKey: ["fundings"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/get-funding");
+      const res = await axiosSecure.get(
+        `/get-single-funding?email=${user?.email}`,
+      );
       return res.data;
     },
   });
-  console.log(funds);
+  
   //! user find by email-----------------
   useEffect(() => {
     const usersFind = async () => {
