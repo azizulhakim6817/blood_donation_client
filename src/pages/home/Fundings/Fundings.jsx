@@ -147,7 +147,7 @@ const Fundings = () => {
           <tbody>
             {funds.map((fund, i) => (
               <tr key={i} className="hover">
-                <td>1</td>
+                <td>{i + 1}</td>
                 <td>{fund?.donorName}</td>
                 <td className="text-green-600 font-semibold">
                   ${fund?.amount}
