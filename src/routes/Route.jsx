@@ -30,7 +30,6 @@ const route = createBrowserRouter([
     path: "/",
     Component: RootLayout,
     errorElement: <NotFund />,
-    errorElement: <NotFund />,
     children: [
       {
         index: true,
