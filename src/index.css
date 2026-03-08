@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
-
 @plugin "daisyui";
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
 
+@plugin "daisyui" {
+  themes:
+    winter --default,
+    night --prefersdark;
+}
+
+@plugin "daisyui" {
   --color-primary: #9501c0;
   --color-secondary: #03373d;
-  --color-accent: #1E3A8A;
+  --color-accent: #1e3a8a;
   --color-accent-content: #8b0000;
   --color-base-100: #ffffff;
 }
@@ -17,3 +20,5 @@
 * {
   font-family: "Roboto", sans-serif;
 }
+
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));

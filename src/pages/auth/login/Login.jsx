@@ -23,7 +23,7 @@ const Login = () => {
   const handleLoginSubmit = async (data) => {
     try {
       const result = await signInUser(data.email, data.password);
-      //console.log("New user:", result.user);
+      //console.log("New user:", result.user); 
       toast.success("Login is successful");
       navigate(from, { replace: true });
     } catch (error) {

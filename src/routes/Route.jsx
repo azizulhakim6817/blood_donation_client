@@ -23,6 +23,8 @@ import BloodDonationRequestDetails from "../pages/home/DonationRequests/BloodDon
 import PaymentSuccess from "../pages/Dashboard/Payments/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/Payments/PaymentCancel/PaymentCancel";
 import NotFund from "../pages/NotFund/NotFund";
+import Settings from "../pages/Dashboard/Settings/Settings";
+import About from "../pages/home/about/About";
 
 const route = createBrowserRouter([
   /* rool-layout---------------- */
@@ -58,6 +60,10 @@ const route = createBrowserRouter([
       {
         path: "search",
         Component: Search,
+      },
+      {
+        path: "about",
+        Component: About,
       },
     ],
   },
@@ -141,6 +147,7 @@ const route = createBrowserRouter([
       },
       { path: "payment-success", Component: PaymentSuccess },
       { path: "payment-cancel", Component: PaymentCancel },
+      { path: "settings", Component: Settings },
     ],
   },
 ]);

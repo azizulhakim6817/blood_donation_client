@@ -2,16 +2,22 @@
 
 ### Frontend Live URL :
 
-https://blood-donation-client-brown.vercel.app
+http://localhost:5173
 
 ### Backend Live URL :
 
 https://blood-donation-server-hazel.vercel.app/donation-requests
 
+### user Dashboard access :
+User: 
+1. Email : mstsornaakhter@gmail.com
+2. Password : 123456
+
 ### Admin Dashboard access :
 
-1. Email : programmerazizulhakim@gmail.com
-2. Password : 123456
+Admin:
+Email: programmerazizulhakim@gmail.com
+Password: 123456
 
 # Blood Donation & Funding Application
 

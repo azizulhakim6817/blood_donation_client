@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { MdDashboardCustomize } from "react-icons/md";
 import { LuLogOut } from "react-icons/lu";
+import ThemeToggle from "../../../components/themeToggle/ThemeToggle";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -18,11 +19,7 @@ const Navbar = () => {
   };
 
   //! get-user?email---------query-----
-  const {
-    data: userData = {},
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: userData = {} } = useQuery({
     queryKey: ["profile", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -41,7 +38,7 @@ const Navbar = () => {
             `transition duration-200 ${
               isActive
                 ? "font-bold text-primary"
-                : "text-gray-700 font-normal hover:text-primary"
+                : "text-gray-700 font-normal hover:text-primary dark:text-white"
             }`
           }
         >
@@ -55,11 +52,11 @@ const Navbar = () => {
             `transition duration-200 ${
               isActive
                 ? "font-bold text-primary"
-                : "text-gray-700 font-normal hover:text-primary"
+                : "text-gray-700 dark:text-white font-normal hover:text-primary"
             }`
           }
         >
-          Donation Requests
+          Donation-Requests
         </NavLink>
       </li>
       <li>
@@ -69,11 +66,25 @@ const Navbar = () => {
             `transition duration-200 ${
               isActive
                 ? "font-bold text-primary"
-                : "text-gray-700 font-normal hover:text-primary"
+                : "text-gray-700 font-normal hover:text-primary dark:text-white"
             }`
           }
         >
           Funding
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            `transition duration-200 ${
+              isActive
+                ? "font-bold text-primary"
+                : "text-gray-700 font-normal hover:text-primary dark:text-white"
+            }`
+          }
+        >
+          About
         </NavLink>
       </li>
     </>
@@ -114,11 +125,14 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
+
       <div className="navbar-end">
+        {/* theme toggle-------------- */}
+        <ThemeToggle />
         {!user && (
           <Link
             to="/login"
-            className="btn bg-primary mt-4 text-base-100 hover:bg-accent"
+            className="btn bg-primary text-base-100 hover:bg-accent"
           >
             Login
           </Link>
@@ -152,17 +166,19 @@ const Navbar = () => {
                     `transition duration-200 ${
                       isActive
                         ? "font-bold text-primary"
-                        : "text-gray-700 hover:text-primary font-semibold hover:font-bold"
+                        : "text-gray-700 hover:text-primary font-semibold hover:font-bold dark:text-white"
                     }`
                   }
                 >
-                  <MdDashboardCustomize size={21} /> Dashboard
+                  <MdDashboardCustomize size={21} />
+                  Dashboard
                 </NavLink>
               </li>
               <li>
+                {/* logout----button---------- */}
                 <Link
                   onClick={handlesignOutUser}
-                  className=" text-rose-700 mt-2 font-semibold hover:font-bold"
+                  className=" text-rose-700 mt-2 font-semibold hover:font-bold dark:text-white"
                 >
                   <LuLogOut size={21} />
                   Log-out
