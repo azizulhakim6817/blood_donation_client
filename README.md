@@ -18,13 +18,15 @@ User:
 ### Admin Dashboard access :
 
 Admin:
-Email: programmerazizulhakim@gmail.com
-Password: 123456
 
-#GitHub Repository Link
+1. Email: programmerazizulhakim@gmail.com
+2. Password: 123456
 
-Frontend source code : https://github.com/azizulhakim6817/blood_donation_client
-Backend source code : https://github.com/azizulhakim6817/blood_donation_server
+## GitHub Repository Link
+
+1. source code : https://github.com/azizulhakim6817/blood_donation_client
+
+2. Backend source code : https://github.com/azizulhakim6817/blood_donation_server
 
 # Blood Donation & Funding Application
 
